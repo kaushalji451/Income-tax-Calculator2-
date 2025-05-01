@@ -6,13 +6,14 @@ import AdvanceTaxCalculation from "./AdvanceTaxCalculation";
 const App = () => {
   return (
     <>
-      <div className=" flex justify-center w-full items-center overflow-auto scrollbar-hide  text-[#f8b3ac] bg-[#262140]">
+      <div className=" flex justify-center  w-full items-center overflow-auto scrollbar-hide  text-[#f8b3ac] bg-[#262140]">
         <div className=" min-md:w-[95%] w-full h-full rounded-xl p-4 pt-15">
           <h1 className="text-center pb-6 font-bold text-4xl">
             Income Tax Calculater
           </h1>
-          <div className="flex gap-5 min-md:ps-10 pb-4">
-            <Link to="/">
+          <div className="flex gap-5 max-sm:flex-col min-md:ps-10 pb-4">
+           <div>
+           <Link to="/">
               <button
                 type="button"
                 class="bg-[#362f5d] text-[#f8b3ac] font-medium rounded-lg text-xl px-5 py-2.5 text-center me-2 mb-2"
@@ -28,6 +29,7 @@ const App = () => {
                 Advance Calculator
               </button>
             </Link>
+           </div>
             <Link to="/history">
               <button
                 type="button"

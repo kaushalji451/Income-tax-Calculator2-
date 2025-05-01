@@ -8,26 +8,27 @@ const AdvanceTaxDetails = ({data}) => {
 
 
   return (
-    <div className=" bg-[#262140] mt-20  mt-4 min-md:px-20 px-2">
+    <div className=" bg-[#262140]  mt-4  px-2">
     <div className='flex items-center pt-10'>
-    <h1 className="font-bold min-md:text-4xl min-md:w-1/2 text-2xl text-center pb-6 py-6">
+    <h1 className='w-1/4'>{data.updatedAt.slice(0,10)}</h1>
+    <h1 className="font-bold min-md:text-4xl min-md:w-1/2 text-2xl max-sm:text-center pb-6 ">
       Your Tax Details
     </h1>
     </div>
     <div className="flex justify-between border-t border-[#f8b3ac] py-4 ">
       <p className="px-4 text-[#f8b3ac] text-xl ">Regime Type</p>
-      {/* {data.regime === "oldRegime" ? (
+      {data.regime === "oldRegime" ? (
         <p className='text-xl'>Old Regime</p>
       ) : (
         <p className='text-xl'>New Regime</p>
-      )} */}
+      )}
     </div>
     <div className="flex justify-between border-t border-[#f8b3ac] py-4 ">
       <p className="px-4 text-[#f8b3ac] text-xl">Gross Total Income</p>
-      <p className='text-xl'>₹{data.grossIncome}</p>
+      <p className='text-xl'>₹{data.anualIncome}</p>
     </div>
     <div className="flex justify-between border-t border-[#f8b3ac] py-4 ">
-      <p className="px-4 text-[#f8b3ac] text-xl ">Eligible Deduction</p>
+      <p className="px-4 text-[#f8b3ac] text-xl ">Deduction</p>
       <p className='text-xl'>₹{data.deduction}</p>
     </div>
     <div className="flex justify-between border-t border-[#f8b3ac] py-4 ">
@@ -42,7 +43,7 @@ const AdvanceTaxDetails = ({data}) => {
     </div>
     <div className="flex justify-between border-t border-[#f8b3ac] py-4 ">
       <p className="px-4 text-[#f8b3ac] text-xl">
-        Income tax After relief u/s 87A
+        Income tax
       </p>
       <p className='text-xl'>₹{data.tax}</p>
     </div>

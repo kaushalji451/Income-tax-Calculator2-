@@ -18,6 +18,12 @@ const TaxHistory = () => {
     handleData();
   }, []);
 
+  if(data!=null){
+    for(let i =data.length;i>=0;i--){
+      console.log("this is data",data[i]);
+    }
+  }
+
   return (
     <>
       <div className="h-[80vh]  bg-[#262140] border-t mt-5 pt-6">
@@ -28,7 +34,7 @@ const TaxHistory = () => {
         {/* // Render history if data is available */}
         {data == null && <p>Loading...</p>}
         {data != null &&
-          data.map((data) => (
+          [...data].reverse().map((data) => (
             <div>
               <TaxDetails data={data}></TaxDetails>
             </div>

@@ -81,6 +81,7 @@ const AdvanceTaxCalculation = () => {
           <div className="flex text-xl  flex-col w-full items-center">
             <div className="flex flex-col gap-4  pb-2 w-full min-md:px-10 px-2">
               {/* regime type */}
+              <h1 className="font-bold text-2xl">Basic Details</h1>
               <div className="flex flex-col gap-4 pb-2 ">
                 <label htmlFor="regime">Regime</label>
                 <select
@@ -238,7 +239,7 @@ const AdvanceTaxCalculation = () => {
                 </div>
               </div>
               {/* sallery income */}
-              <h1>Sallery income</h1> {/*Done*/}
+              <h1 className="font-bold text-2xl">Salary Income</h1> {/*Done*/}
               <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-4">
                   <label htmlFor="basicSalary">Basic Salary</label>
@@ -304,7 +305,7 @@ const AdvanceTaxCalculation = () => {
                 </div>
               </div>
               {/* house and property */}
-              <h1>House and Property</h1>
+              <h1 className="font-bold text-2xl">House and Property</h1>
               <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-4">
                   <label htmlFor="propertyType">Property Type</label>
@@ -333,7 +334,7 @@ const AdvanceTaxCalculation = () => {
                   <input
                     type="number"
                     name="standardDeduction"
-                    placeholder="standard deduction"
+                    placeholder="Standard Deduction"
                     className="border-t border-b rounded-xl py-4 px-2"
                     onChange={handleChange}
                   />
@@ -350,7 +351,7 @@ const AdvanceTaxCalculation = () => {
                 </div>
               </div>
               {/* profit gain from bussiness */}
-              <h1>profit gain from bussiness</h1>
+              <h1 className="font-bold text-2xl">Profit Gain From Bussiness</h1>
               <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-4">
                   <label htmlFor="selfEmployed">Self Employed</label>
@@ -385,7 +386,7 @@ const AdvanceTaxCalculation = () => {
                 </div>
               </div>
               {/* capital gain*/}
-              <h1>Capital Gain</h1>
+              <h1 className="font-bold text-2xl">Capital Gain</h1>
               <div className="p-4">
                 <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-4">
@@ -449,7 +450,7 @@ const AdvanceTaxCalculation = () => {
                 </div>
               </div>
               {/* other income */}
-              <h1>other income</h1>
+              <h1 className="font-bold text-2xl">Other Income</h1>
               <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-4">
                   <label htmlFor="dividendIncome">Dividend Income</label>
@@ -483,10 +484,10 @@ const AdvanceTaxCalculation = () => {
                 </div>
               </div>
               {/* tax paid & tds */}
-              <h1>Tax Paid & TDS</h1>
+              <h1 className="font-bold text-2xl">Tax Paid & TDS</h1>
               <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-4">
-                  <label htmlFor="tdsDeducted">TDS Deducted"</label>
+                  <label htmlFor="tdsDeducted">TDS Deducted</label>
                   <input
                     type="number"
                     name="tdsDeducted"
@@ -507,7 +508,7 @@ const AdvanceTaxCalculation = () => {
                 </div>
               </div>
               {/* deduction */}
-              <h1>Deduction</h1>
+              <h1 className="font-bold text-2xl">Deduction</h1>
               <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-4">
                   <label htmlFor="section80C">section80C</label>
