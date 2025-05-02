@@ -57,13 +57,22 @@ module.exports = function AdvanceTax(input){
 
 
    //  Deductions (Chapter VI-A)
-   const totalDeductions =
-   Math.min(num(input.section80C), 150000) +
-   num(input.section80D) +
-   num(input.section80E) +
-   num(input.section80G) +
-   num(input.section80TTA);
+   let totalDeductions = 0;
 
+if (input.regime === "newRegime") {
+  if (input.year === "2025-2026") {
+    totalDeductions = 75000;
+  } else if (input.year === "2024-2025") {
+    totalDeductions = 50000;
+  }
+} else {
+  totalDeductions =
+    Math.min(num(input.section80C), 150000) +
+    num(input.section80D) +
+    num(input.section80E) +
+    num(input.section80G) +
+    num(input.section80TTA);
+}
 
    // Step 8: Net Taxable Income
   const taxableIncome = Math.max(grossIncome - totalDeductions, 0);
@@ -76,6 +85,7 @@ module.exports = function AdvanceTax(input){
   let taxBreakdown = [];
   const regime = input.regime;
 const age = parseInt(input.age);
+
 
   // slab
   let slabs;
