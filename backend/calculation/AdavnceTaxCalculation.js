@@ -59,20 +59,25 @@ module.exports = function AdvanceTax(input){
    //  Deductions (Chapter VI-A)
    let totalDeductions = 0;
 
-if (input.regime === "newRegime") {
-  if (input.year === "2025-2026") {
-    totalDeductions = 75000;
-  } else if (input.year === "2024-2025") {
-    totalDeductions = 50000;
-  }
-} else {
-  totalDeductions =
-    Math.min(num(input.section80C), 150000) +
-    num(input.section80D) +
-    num(input.section80E) +
-    num(input.section80G) +
-    num(input.section80TTA);
-}
+   // Step 1: Base deduction based on regime and year
+   if (input.regime === "newRegime") {
+     if (input.year === "2025-2026") {
+       totalDeductions += 75000;
+     } else if (input.year === "2024-2025") {
+       totalDeductions += 50000;
+     }
+   } else {
+     // Old regime gets standard deduction of ₹50,000
+     totalDeductions += 50000;
+   }
+   
+   // Step 2: Add deductions from applicable sections
+   totalDeductions +=
+     Math.min(num(input.section80C), 150000) +
+     num(input.section80D) +
+     num(input.section80E) +
+     num(input.section80G) +
+     num(input.section80TTA);
 
    // Step 8: Net Taxable Income
   const taxableIncome = Math.max(grossIncome - totalDeductions, 0);
