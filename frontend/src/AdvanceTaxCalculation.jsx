@@ -68,7 +68,6 @@ const AdvanceTaxCalculation = () => {
       body: JSON.stringify(formdata),
     });
     let result = await response.json();
-    console.log(result);  
     setdata(result); // set the output from backend to data State
     // e.target.reset(); // reset the form fields
   };

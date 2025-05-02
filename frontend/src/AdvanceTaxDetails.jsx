@@ -2,11 +2,6 @@ import React from 'react'
 
 const AdvanceTaxDetails = ({data}) => {
 
-  console.log(data.taxBreakdown.map((d)=>{
-    console.log(d)
-  }))
-
-
   return (
     <div className=" bg-[#262140]  mt-4  px-2">
     <div className='flex items-center pt-10'>

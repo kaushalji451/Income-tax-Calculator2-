@@ -18,11 +18,6 @@ const TaxHistory = () => {
     handleData();
   }, []);
 
-  if(data!=null){
-    for(let i =data.length;i>=0;i--){
-      console.log("this is data",data[i]);
-    }
-  }
 
   return (
     <>
