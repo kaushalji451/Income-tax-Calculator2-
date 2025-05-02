@@ -60,7 +60,7 @@ const AdvanceTaxCalculation = () => {
   let handleSubmit = async (e) => {
     e.preventDefault();
     // send data to backend
-    const response = await fetch("http://localhost:8080/adv_tax", {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/adv_tax`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
