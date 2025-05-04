@@ -6,6 +6,7 @@ const Calculation = require("../models/Calculation");
 
 router.post("/", async(req, res) => {
   const taxData = req.body;
+  console.log(req.body);
   const data = AdvanceTax(taxData);
   try {
     const Tax = new Calculation({
@@ -22,6 +23,9 @@ router.post("/", async(req, res) => {
       regime: taxData.regime,
       surcharge: data.surcharge,
       taxBreakdown: data.taxBreakdown,
+      tds : data.tds,
+      advanceTax : data.advanceTax,
+      netTaxPayable : data.netTaxPayable
     });
       let result = await Tax.save();
       res.status(200).json(result);

@@ -15,6 +15,9 @@ const calculationSchema = new Schema(
     tax: { type: Number, required: true },
     regime: { type: String, require: true },
     surcharge: { type: Number, required: true },
+    tds : Number,
+    advanceTax :Number ,
+    netTaxPayable : Number,
     taxBreakdown: [
       {
         slab: String,

@@ -53,8 +53,20 @@ const AdvanceTaxDetails = ({data}) => {
       <p className='text-xl'>₹{data.cess}</p>
     </div>
     <div className="flex justify-between border-t border-[#f8b3ac] py-4 ">
-      <p className="px-4 text-[#f8b3ac] text-xl">Total Tax Liability</p>
+      <p className="px-4 text-[#f8b3ac] text-xl"> Tax Liability</p>
       <p className='text-xl'>₹{data.totalTax}</p>
+    </div>
+    <div className="flex justify-between border-t border-[#f8b3ac] py-4 ">
+      <p className="px-4 text-[#f8b3ac] text-xl">TDS</p>
+      <p className='text-xl'>₹{data.tds}</p>
+    </div>
+    <div className="flex justify-between border-t border-[#f8b3ac] py-4 ">
+      <p className="px-4 text-[#f8b3ac] text-xl">Advance Tax</p>
+      <p className='text-xl'>₹{data.advanceTax}</p>
+    </div>
+    <div className="flex justify-between border-t border-[#f8b3ac] py-4 ">
+      <p className="px-4 text-[#f8b3ac] text-xl">Net Tax Payable</p>
+      <p className='text-xl'>₹{data.netTaxPayable}</p>
     </div>
     <div className="my-4 py-4 pt-20 ">
       <p className="font-bold text-4xl text-center">Tax BreakDown</p>

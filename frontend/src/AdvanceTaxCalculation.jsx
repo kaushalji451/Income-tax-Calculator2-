@@ -31,7 +31,9 @@ const AdvanceTaxCalculation = () => {
     holdingPeriod: "",
     saleValue: "",
     purchaseCost: "",
-    exemptionSection: "",
+    section54 : "",
+    section54F : "",
+    section54EC : "",
     // other income
     dividendIncome: "",
     giftIncome: "",
@@ -59,6 +61,7 @@ const AdvanceTaxCalculation = () => {
 
   let handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formdata);
     // send data to backend
     const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/adv_tax`, {
       method: "POST",
@@ -70,6 +73,7 @@ const AdvanceTaxCalculation = () => {
     let result = await response.json();
     setdata(result); // set the output from backend to data State
     // e.target.reset(); // reset the form fields
+    console.log(result);
   };
 
   return (
@@ -348,6 +352,16 @@ const AdvanceTaxCalculation = () => {
                     onChange={handleChange}
                   />
                 </div>
+                <div className="flex flex-col gap-4">
+                  <label htmlFor="section24b">section24b</label>
+                  <input
+                    type="number"
+                    name="section24b"
+                    placeholder="24(b) - Home Loan Interest (Self-Occupied)"
+                    className="border-t border-b rounded-xl py-4 px-2"
+                    onChange={handleChange}
+                  />
+                </div>
               </div>
               {/* profit gain from bussiness */}
               <h1 className="font-bold text-2xl">Profit Gain From Bussiness</h1>
@@ -433,18 +447,36 @@ const AdvanceTaxCalculation = () => {
                     onChange={handleChange}
                     />
                   </div>
+                  {/* exemptions */}
                   <div className="flex flex-col gap-4">
-                    <label htmlFor="exemptionSection">Exemption Section</label>
-                    <select
-                      name="exemptionSection"
+                    <label htmlFor="section54">Section 54</label>
+                    <input
+                      type="number"
+                      name="section54"
+                      placeholder="section54"
                       className="border-t border-b rounded-xl py-4 px-2"
                     onChange={handleChange}
-                    >
-                      <option value="">Exemption (if any)</option>
-                      <option value="54">54</option>
-                      <option value="54EC">54EC</option>
-                      <option value="54F">54F</option>
-                    </select>
+                    />
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    <label htmlFor="section54F">Section 54F</label>
+                    <input
+                      type="number"
+                      name="section54F"
+                      placeholder="section54F"
+                      className="border-t border-b rounded-xl py-4 px-2"
+                    onChange={handleChange}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    <label htmlFor="section54EC">Section 54EC</label>
+                    <input
+                      type="number"
+                      name="section54EC"
+                      placeholder="section54EC"
+                      className="border-t border-b rounded-xl py-4 px-2"
+                    onChange={handleChange}
+                    />
                   </div>
                 </div>
               </div>
@@ -555,16 +587,6 @@ const AdvanceTaxCalculation = () => {
                     type="number"
                     name="section80TTA"
                     placeholder="80TTA - Savings Interest"
-                    className="border-t border-b rounded-xl py-4 px-2"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="flex flex-col gap-4">
-                  <label htmlFor="section24b">section24b</label>
-                  <input
-                    type="number"
-                    name="section24b"
-                    placeholder="24(b) - Home Loan Interest (Self-Occupied)"
                     className="border-t border-b rounded-xl py-4 px-2"
                     onChange={handleChange}
                   />

@@ -11,24 +11,41 @@ module.exports = function AdvanceTax(input){
      // Convert all values to numbers
   const num = (val) => parseFloat(val) || 0;
 
-   //  Income from Salary
+  let stanDeduction;
+  // Step 1: Base deduction based on regime and year
+  if (input.regime === "newRegime") {
+    if (input.year === "2025-2026") {
+      stanDeduction = 75000;
+    } else if (input.year === "2024-2025") {
+      stanDeduction = 50000;
+    }
+  } else {
+    // Old regime gets standard deduction of ₹50,000
+    stanDeduction= 50000;
+  };
+
+  let netSalary = num(input.basicSalary)+
+  num(input.dearnessAllowance)+
+  num(input.houseRentAllowance) +
+  num(input.otherAllowances) - stanDeduction;
+
    const salaryIncome = 
-   num(input.basicSalary) +
-   num(input.dearnessAllowance) +
-   num(input.houseRentAllowance) +
-   num(input.otherAllowances) +
-   num(input.perquisites) -
-   num(input.professionalTax) -
-   num(input.standardDeduction);
+   netSalary + num(input.perquisites) -num(input.professionalTax);
 
    //  Income from House Property
   let housePropertyIncome = num(input.rentalIncome);
+
   if (input.propertyType === 'Self-Occupied') {
-    housePropertyIncome -= Math.min(num(input.section24b), 200000);
+    housePropertyIncome = Math.max(housePropertyIncome - Math.min(num(input.section24b), 200000), 0);
   } else {
     housePropertyIncome -= num(input.section24b); // No limit if let out
+    
+   housePropertyIncome -=num(input.standardDeduction);
+   
+   // Apply 30% standard deduction on the *net annual value* (after 24b)
+   housePropertyIncome -= housePropertyIncome * 0.30;
   }
-
+  console.log(housePropertyIncome);
    //  Business/Profession Income
    const businessIncome = 
    num(input.businesses) +
@@ -37,9 +54,18 @@ module.exports = function AdvanceTax(input){
 
    //  Capital Gains
   let capitalGains = 0;
-  if (input.holdingPeriod === 'Long-Term') {
+  if (!["Short-Term", "Long-Term"].includes(input.holdingPeriod)) {
+    capitalGains = 0; 
+  }else if (input.holdingPeriod === 'Long-Term') {
     const gain = num(input.saleValue) - num(input.purchaseCost);
-    capitalGains = Math.max(gain, 0); // No loss deduction in this model
+
+    const exemption54 = num(input.section54);
+    const exemption54F = num(input.section54F);
+    const exemption54EC = num(input.section54EC);
+
+    const totalExemption = exemption54 + exemption54F + exemption54EC;
+
+    capitalGains = Math.max(gain-totalExemption, 0); // No loss deduction in this model
   }
   if (input.holdingPeriod === 'Short-Term') {
     capitalGains = Math.max(num(input.saleValue) - num(input.purchaseCost), 0);
@@ -58,18 +84,6 @@ module.exports = function AdvanceTax(input){
 
    //  Deductions (Chapter VI-A)
    let totalDeductions = 0;
-
-   // Step 1: Base deduction based on regime and year
-   if (input.regime === "newRegime") {
-     if (input.year === "2025-2026") {
-       totalDeductions += 75000;
-     } else if (input.year === "2024-2025") {
-       totalDeductions += 50000;
-     }
-   } else {
-     // Old regime gets standard deduction of ₹50,000
-     totalDeductions += 50000;
-   }
    
    // Step 2: Add deductions from applicable sections
    totalDeductions +=
@@ -184,6 +198,12 @@ const age = parseInt(input.age);
      taxBreakdown = []
    }
 
+    // Apply TDS and Advance Tax deductions
+  const tds = num(input.tdsDeducted);
+  const advanceTax = num(input.advanceTaxPaid);
+  const netTaxPayable = Math.max(Math.round(totalTax - tds - advanceTax), 0);
+
+
    return {
     grossIncome,
     taxableIncome,
@@ -193,6 +213,9 @@ const age = parseInt(input.age);
     cess: Math.round(cess),
     deduction: Math.round(totalDeductions),
     totalTax: Math.round(totalTax),
+    tds: Math.round(tds),
+    advanceTax: Math.round(advanceTax),
+    netTaxPayable,
     taxBreakdown,
   };
 
